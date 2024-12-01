@@ -8,7 +8,7 @@ class Grade:
         self.__assignment = assignment  # Associated assignment
         self.__score = score  # Score for the assignment
         self.__feedback = feedback  # Optional feedback from the instructor
-        self.validate_score()  # Validate the score on initialization
+        self.validate_score(self.__score)  # Validate the score on initialization
 
     @property
     def student(self) -> 'Student':
@@ -26,7 +26,8 @@ class Grade:
     def feedback(self) -> str:
         return self.__feedback
 
-    def validate_score(self) -> None:
+    @staticmethod
+    def validate_score(score: float) -> None:
         """Validate that the score is within the acceptable range (0-100)."""
         if not (0 <= self.__score <= 100):
             raise ValueError("Score must be between 0 and 100.")
