@@ -15,7 +15,16 @@ class Course:
         self._units = units
         self.assignments: List['Assignment'] = []  # Initialize assignments list
         self.grades = {} 
-
+    
+    @classmethod
+    def from_dict(cls, data: dict) -> 'Course':
+        """Create a Course instance from a dictionary."""
+        instructor = Instructor(data['instructor_id'])  # Assuming you have a way to get an Instructor instance
+        return cls(course_name=data['course_name'], 
+                   course_code=data['course_code'], 
+                   instructor=instructor, 
+                   units=data['units'])
+        
     def add_grade(self, course, grade):
         """Add a grade for the given course."""
         self.grades[course.course_code] = grade
